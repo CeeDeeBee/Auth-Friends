@@ -24,6 +24,18 @@ const FriendsList = () => {
 			});
 	}, []);
 
+	const handleDelete = id => {
+		axiosWithAuth()
+			.delete(`/api/friends/${id}`)
+			.then(res => {
+				console.log(res);
+				setFriends(res.data);
+			})
+			.catch(err =>
+				setError(`Error: ${err.response.status} ${err.response.statusText}`)
+			);
+	};
+
 	return (
 		<div className="friends-list">
 			{isLoading && (
@@ -35,7 +47,13 @@ const FriendsList = () => {
 			{!isLoading && error && <div className="error">{error}</div>}
 			{!isLoading &&
 				!error &&
-				friends.map(friend => <FriendCard key={friend.id} friend={friend} />)}
+				friends.map(friend => (
+					<FriendCard
+						key={friend.id}
+						friend={friend}
+						handleDelete={handleDelete}
+					/>
+				))}
 		</div>
 	);
 };

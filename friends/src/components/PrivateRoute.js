@@ -3,9 +3,16 @@ import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
 	return (
-		<Route {...rest}>
-			{localStorage.getItem("token") ? children : <Redirect to="/login" />}
-		</Route>
+		<Route
+			{...rest}
+			render={() => {
+				return localStorage.getItem("token") ? (
+					children
+				) : (
+					<Redirect to="/login" />
+				);
+			}}
+		/>
 	);
 };
 

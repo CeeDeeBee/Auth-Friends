@@ -34,6 +34,7 @@ const AddFriend = () => {
 
 	return (
 		<div className="add-friend">
+			<h1>Add Friend</h1>
 			{addedFriend && <div className="add-success">Friend Added!</div>}
 			{error && <div className="error">{error}</div>}
 			<form onSubmit={handleSubmit}>

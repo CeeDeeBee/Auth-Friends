@@ -23,6 +23,7 @@ const Login = () => {
 			.then(res => {
 				localStorage.setItem("token", JSON.stringify(res.data.payload));
 				history.push("/friends");
+				console.log(history);
 			})
 			.catch(err => console.log(err.response));
 		setCredentials({
@@ -33,6 +34,7 @@ const Login = () => {
 
 	return (
 		<div className="login">
+			<h1>Login</h1>
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
