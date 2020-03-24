@@ -26,11 +26,16 @@ const FriendsList = () => {
 
 	return (
 		<div className="friends-list">
-			{isLoading && <MoonLoader size={80} />}
+			{isLoading && (
+				<div className="loading">
+					<h2>Loading Friends...</h2>
+					<MoonLoader size={80} />
+				</div>
+			)}
+			{!isLoading && error && <div className="error">{error}</div>}
 			{!isLoading &&
 				!error &&
 				friends.map(friend => <FriendCard key={friend.id} friend={friend} />)}
-			{!isLoading && error && <div className="error">{error}</div>}
 		</div>
 	);
 };
