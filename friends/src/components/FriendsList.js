@@ -36,6 +36,19 @@ const FriendsList = () => {
 			);
 	};
 
+	const handleEdit = (id, friend) => {
+		axiosWithAuth()
+			.put(`/api/friends/${id}`, friend)
+			.then(res => {
+				console.log(res);
+				setFriends(res.data);
+			})
+			.catch(err => {
+				console.log(err.response);
+				setError(`Error: ${err.response.status} ${err.response.statusText}`);
+			});
+	};
+
 	return (
 		<div className="friends-list">
 			{isLoading && (
@@ -52,6 +65,7 @@ const FriendsList = () => {
 						key={friend.id}
 						friend={friend}
 						handleDelete={handleDelete}
+						handleEdit={handleEdit}
 					/>
 				))}
 		</div>
